@@ -10,6 +10,9 @@
 <head>
     <title>Title</title>
 </head>
+<style>
+    <%@include file="css/bootstrap.min.css" %>
+</style>
 <body>
 
 
