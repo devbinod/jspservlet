@@ -22,7 +22,7 @@
                     <a class="nav-link" href="${pageContext.request.contextPath}/students">Student <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Teacher</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/grades">Grade</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Staff</a>

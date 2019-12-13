@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="../header/header.jsp"%>
 
     <form action="${pageContext.request.contextPath}/addStudent" method="post">
@@ -14,6 +15,18 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-md-6">
+                <label>Grade</label>
+                <select name="grade" class="form-control">
+                    <option> Choose Grade</option>
+                    <c:forEach items="${gradeList}" var="g">
+                        <option value="${g.id}">${g.name}</option>
+                    </c:forEach>
+
+                </select>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-6">
                 <label>Address</label>

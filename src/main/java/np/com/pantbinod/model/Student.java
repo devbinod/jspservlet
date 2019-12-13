@@ -1,12 +1,41 @@
 package np.com.pantbinod.model;
 
 public class Student {
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", grade=" + grade +
+                '}';
+    }
 
     private int id;
     private String firstName;
     private String  lastName;
     private String address;
     private String phoneNumber;
+    private Grade grade;
+
+    public Student(int id, String firstName, String lastName, String address, String phoneNumber, Grade grade) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.grade = grade;
+    }
+
+    public Grade getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Grade grade) {
+        this.grade = grade;
+    }
 
     public Student() {
     }

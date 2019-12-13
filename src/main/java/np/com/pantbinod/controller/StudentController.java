@@ -1,8 +1,10 @@
 package np.com.pantbinod.controller;
 
 import np.com.pantbinod.dao.Dao;
+import np.com.pantbinod.daoimpl.GradeDaoImpl;
 import np.com.pantbinod.daoimpl.StudentDaoImpl;
 import np.com.pantbinod.enumlist.ActionList;
+import np.com.pantbinod.model.Grade;
 import np.com.pantbinod.model.Student;
 
 import javax.servlet.ServletException;
@@ -11,18 +13,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(urlPatterns = {"/students","/addStudent","/deleteStudent","/updateStudent"})
 public class StudentController extends HttpServlet {
 
     Dao dao = new StudentDaoImpl();
+    Dao gradeDao = new GradeDaoImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
 
         if (action == null) {
-
             req.setAttribute("title", "student list");
             req.setAttribute("studentList", dao.findAll());
             req.getRequestDispatcher("student/index.jsp")
@@ -32,6 +35,7 @@ public class StudentController extends HttpServlet {
 
             if (action.equalsIgnoreCase(ActionList.ADD.toString())) {
                 req.setAttribute("title", "add student");
+                req.setAttribute("gradeList", gradeDao.findAll());
                 req.getRequestDispatcher("student/add.jsp")
                         .forward(req, resp);
             }else if(action.equalsIgnoreCase(ActionList.DELETE.toString())){
@@ -63,9 +67,10 @@ public class StudentController extends HttpServlet {
         student.setLastName(req.getParameter("lastName"));
         student.setAddress(req.getParameter("address"));
         student.setPhoneNumber(req.getParameter("phoneNumber"));
+        Grade grade = (Grade) gradeDao.findById(Integer.parseInt(req.getParameter("grade")));
+        student.setGrade(grade);
         dao.add(
-                student
-        );
+                student);
         List<Student> studentList = dao.findAll();
         req.setAttribute("studentList",studentList);
         req.getRequestDispatcher("student/index.jsp")

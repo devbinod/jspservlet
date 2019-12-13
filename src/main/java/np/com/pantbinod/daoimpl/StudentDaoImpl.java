@@ -15,13 +15,15 @@ public class StudentDaoImpl implements Dao<Student>, StudentDao {
     public boolean add(Student student) {
 
         dbConnection.open();
-        String query = "insert into student(first_name, last_name,address,phone_number) values(?,?,?,?)";
+        String query = "insert into student(first_name, last_name,address,phone_number,grade_id) values(?,?,?,?,?)";
         PreparedStatement preparedStatement = dbConnection.getPreparedStatement(query);
         try {
+            System.out.println("student = " + student);
             preparedStatement.setString(1,student.getFirstName());
             preparedStatement.setString(2,student.getLastName());
             preparedStatement.setString(3,student.getAddress());
             preparedStatement.setString(4,student.getPhoneNumber());
+            preparedStatement.setInt(5,student.getGrade().getId());
             int i = preparedStatement.executeUpdate();
             dbConnection.close();
             if(i > 0) return true;
@@ -122,4 +124,8 @@ public class StudentDaoImpl implements Dao<Student>, StudentDao {
     public List<Student> findByFirstName(String firstName) {
         return null;
     }
+
+
+
 }
+
